@@ -31,11 +31,15 @@ app.use((req, res, next) => {
     next()
 })
 
+// Using the default port for render hosting and if I don't have it I use port 4000
+const PORT = process.env.PORT || process.env.SECRET_PORT;
+
+
 //Listener and conncetion to mongoDB online cluster
 mongoose.connect(process.env.MONGO_DB_URL)
     .then(() => {
-        app.listen(process.env.PORT || process.env.SECRET_PORT, () => {
-            console.log("CONNECTED TO MONGO DB AND LISTENING ON SECRET PORT.")
+        app.listen(PORT, () => {
+            console.log("!!! SUCCESSFULLY CONNECTED TO MONGO DB ONLINE CLUSTER AND SERVER IS LISTENING ON PORT " + PORT)
         })
     })
     .catch((error) => {
